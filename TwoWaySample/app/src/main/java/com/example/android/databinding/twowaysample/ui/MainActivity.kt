@@ -17,14 +17,14 @@
 package com.example.android.databinding.twowaysample.ui
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.databinding.Observable
-import android.databinding.ObservableInt
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
+import androidx.databinding.ObservableInt
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.databinding.twowaysample.BR
 import com.example.android.databinding.twowaysample.R
 import com.example.android.databinding.twowaysample.data.IntervalTimerViewModel
@@ -54,22 +54,22 @@ class MainActivity : AppCompatActivity() {
 
         val binding: IntervalTimerBinding = DataBindingUtil.setContentView(
                 this, R.layout.interval_timer)
-        val viewmodel = intervalTimerViewModel
-        binding.viewmodel = viewmodel
+        val viewModel = intervalTimerViewModel
+        binding.viewmodel = viewModel
 
         /* Save the user settings whenever they change */
         observeAndSaveTimePerSet(
-                viewmodel.timePerWorkSet, R.string.prefs_timePerWorkSet)
+                viewModel.timePerWorkSet, R.string.prefs_timePerWorkSet)
         observeAndSaveTimePerSet(
-                viewmodel.timePerRestSet, R.string.prefs_timePerRestSet)
+                viewModel.timePerRestSet, R.string.prefs_timePerRestSet)
 
         /* Number of sets needs a different  */
-        observeAndSaveNumberOfSets(viewmodel)
+        observeAndSaveNumberOfSets(viewModel)
 
         if (savedInstanceState == null) {
             /* If this is the first run, restore shared settings */
-            restorePreferences(viewmodel)
-            observeAndSaveNumberOfSets(viewmodel)
+            restorePreferences(viewModel)
+            observeAndSaveNumberOfSets(viewModel)
         }
     }
 
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                         getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE) ?: return
                 sharedPref.edit().apply {
                     putInt(getString(prefsKey), (observable as ObservableInt).get())
-                    commit()
+                    apply()
                 }
             }
         })
@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                             getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE) ?: return
                     sharedPref.edit().apply {
                         putInt(getString(R.string.prefs_numberOfSets), viewModel.numberOfSets[1])
-                        commit()
+                        apply()
                     }
                 }
             }

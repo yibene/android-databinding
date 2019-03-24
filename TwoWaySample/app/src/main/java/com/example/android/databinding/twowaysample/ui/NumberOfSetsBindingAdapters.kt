@@ -17,13 +17,13 @@
 package com.example.android.databinding.twowaysample.ui
 
 import android.content.Context
-import android.databinding.BindingAdapter
-import android.databinding.InverseBindingAdapter
-import android.databinding.InverseBindingListener
-import android.databinding.InverseMethod
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingAdapter
+import androidx.databinding.InverseBindingListener
+import androidx.databinding.InverseMethod
 import com.example.android.databinding.twowaysample.R
 
 

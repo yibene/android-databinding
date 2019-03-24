@@ -16,10 +16,10 @@
 
 package com.example.android.databinding.twowaysample.util
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.Bindable
-import android.databinding.Observable
-import android.databinding.PropertyChangeRegistry
+import androidx.databinding.Observable
+import androidx.databinding.PropertyChangeRegistry
+import androidx.lifecycle.ViewModel
+
 
 /**
  * An [Observable] [ViewModel] for Data Binding.

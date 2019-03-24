@@ -32,7 +32,7 @@ fun cleanSecondsString(seconds: String): Int {
     // Remove letters and other characters
     val filteredValue = seconds.replace(Regex("""[^\d:.]"""), "")
     if (filteredValue.isEmpty()) return 0
-    val elements: List<Int> = filteredValue.split(":").map { it -> round(it.toDouble()).toInt() }
+    val elements: List<Int> = filteredValue.split(":").map { round(it.toDouble()).toInt() }
 
     var result: Int
     return when {

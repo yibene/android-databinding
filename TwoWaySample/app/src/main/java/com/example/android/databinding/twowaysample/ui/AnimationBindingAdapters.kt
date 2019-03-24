@@ -19,11 +19,11 @@ package com.example.android.databinding.twowaysample.ui
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.databinding.BindingAdapter
-import android.support.constraint.ConstraintLayout
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.animation.DecelerateInterpolator
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
 import com.example.android.databinding.twowaysample.R
 
 /**
