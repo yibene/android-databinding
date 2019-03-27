@@ -18,6 +18,7 @@ package com.example.android.databinding.twowaysample.ui
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -61,8 +62,9 @@ object BindingAdapters {
      *
      * @see [clearTextOnFocus] for a version without a listener.
      */
-    @BindingAdapter("clearOnFocusAndDispatch")
+    @BindingAdapter("app:clearOnFocusAndDispatch")
     @JvmStatic fun clearOnFocusAndDispatch(view: EditText, listener: View.OnFocusChangeListener?) {
+        Log.w("Cash", "clearOnFocusAndDispatch, text = ${view.text}")
         view.onFocusChangeListener = View.OnFocusChangeListener { focusedView, hasFocus ->
             val textView = focusedView as TextView
             if (hasFocus) {
@@ -88,7 +90,7 @@ object BindingAdapters {
      * @JvmStatic fun clearTextOnFocus(view: EditText, enabled: Boolean)...
      * ```
      */
-    @BindingAdapter("clearTextOnFocus")
+    @BindingAdapter("app:clearTextOnFocus")
     @JvmStatic fun EditText.clearTextOnFocus(enabled: Boolean) {
         if (enabled) {
             clearOnFocusAndDispatch(this, null)
@@ -103,7 +105,7 @@ object BindingAdapters {
      * Note that there can only be one [TextView.OnEditorActionListener] on each [EditText] and
      * this [BindingAdapter] sets it.
      */
-    @BindingAdapter("hideKeyboardOnInputDone")
+    @BindingAdapter("app:hideKeyboardOnInputDone")
     @JvmStatic fun hideKeyboardOnInputDone(view: EditText, enabled: Boolean) {
         if (!enabled) return
         val listener = TextView.OnEditorActionListener { _, actionId, _ ->
@@ -157,16 +159,16 @@ object BindingAdapters {
      * Also, this showcases how to deal with multiple API levels.
      */
     @BindingAdapter(value=["android:max", "android:progress"], requireAll = true)
-    @JvmStatic fun updateProgress(progressBar: ProgressBar, max: Int, progress: Int) {
-        progressBar.max = max
+    @JvmStatic fun updateProgress(progressBar: ProgressBar, max: Float, progress: Float) {
+        progressBar.max = max.toInt()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            progressBar.setProgress(progress, false)
+            progressBar.setProgress(progress.toInt(), false)
         } else {
-            progressBar.progress = progress
+            progressBar.progress = progress.toInt()
         }
     }
 
-    @BindingAdapter("loseFocusWhen")
+    @BindingAdapter("app:loseFocusWhen")
     @JvmStatic fun loseFocusWhen(view: EditText, condition: Boolean) {
         if (condition) view.clearFocus()
     }

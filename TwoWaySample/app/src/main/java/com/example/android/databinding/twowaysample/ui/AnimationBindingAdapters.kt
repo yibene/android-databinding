@@ -42,7 +42,7 @@ object AnimationBindingAdapters {
      * @param timerRunning whether the app timer is running
      * @param activeStage whether this particular timer (work/rest) is active
      */
-    @BindingAdapter(value=["animateBackground", "animateBackgroundStage"], requireAll = true)
+    @BindingAdapter(value=["app:animateBackground", "app:animateBackgroundStage"], requireAll = true)
     @JvmStatic fun animateBackground(view: View, timerRunning: Boolean, activeStage: Boolean) {
         // If the timer is not running, don't animate and set the default color.
         if (!timerRunning) {
@@ -77,7 +77,7 @@ object AnimationBindingAdapters {
      * @param timerRunning whether the app timer is running
      * @param activeStage whether this particular timer (work/rest) is active
      */
-    @BindingAdapter(value=["animateVerticalBias", "animateVerticalBiasStage"],
+    @BindingAdapter(value=["app:animateVerticalBias", "app:animateVerticalBiasStage"],
             requireAll = true)
     @JvmStatic fun animateVerticalBias(view: View, timerRunning: Boolean, activeStage: Boolean) {
         // Change the vertical bias of the View depending on the current state

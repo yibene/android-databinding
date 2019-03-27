@@ -17,6 +17,7 @@
 package com.example.android.databinding.twowaysample.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -43,7 +44,7 @@ object NumberOfSetsBindingAdapters {
     /**
      * Needs to be used with [NumberOfSetsConverters.setArrayToString].
      */
-    @BindingAdapter("numberOfSets")
+    @BindingAdapter("app:numberOfSets")
     @JvmStatic fun setNumberOfSets(view: EditText, value: String) {
         view.setText(value)
     }
@@ -55,7 +56,7 @@ object NumberOfSetsBindingAdapters {
      * Used with the inverse method of [NumberOfSetsConverters.setArrayToString], which is
      * [NumberOfSetsConverters.stringToSetArray].
      */
-    @InverseBindingAdapter(attribute = "numberOfSets")
+    @InverseBindingAdapter(attribute = "app:numberOfSets")
     @JvmStatic fun getNumberOfSets(editText: EditText): String {
         return editText.text.toString()
     }
@@ -69,7 +70,7 @@ object NumberOfSetsBindingAdapters {
      * with `requireAll = false`. See [android.databinding.adapters.CompoundButtonBindingAdapter]
      * for an example.
      */
-    @BindingAdapter("numberOfSetsAttrChanged")
+    @BindingAdapter("app:numberOfSetsAttrChanged")
     @JvmStatic fun setListener(view: EditText, listener: InverseBindingListener?) {
         view.onFocusChangeListener = View.OnFocusChangeListener { focusedView, hasFocus ->
             val textView = focusedView as TextView
@@ -86,7 +87,7 @@ object NumberOfSetsBindingAdapters {
     /* This sample showcases the NumberOfSetsConverters below, but note that they could be used
     also like: */
 
-    @BindingAdapter("numberOfSets_alternative")
+    @BindingAdapter("app:numberOfSets_alternative")
     @JvmStatic fun setNumberOfSets_alternative(view: EditText, value: Array<Int>) {
         view.setText(String.format(
                 view.resources.getString(R.string.sets_format,
@@ -94,7 +95,7 @@ object NumberOfSetsBindingAdapters {
                         value[1])))
     }
 
-    @InverseBindingAdapter(attribute = "numberOfSets_alternative")
+    @InverseBindingAdapter(attribute = "app:numberOfSets_alternative")
     @JvmStatic fun getNumberOfSets_alternative(editText: EditText): Array<Int> {
         if (editText.text.isEmpty()) {
             return arrayOf(0, 0)
@@ -118,6 +119,7 @@ object NumberOfSetsConverters {
      */
     @InverseMethod("stringToSetArray")
     @JvmStatic fun setArrayToString(context: Context, value: Array<Int>): String {
+        Log.w("Cash", "setArrayToString: ${value[0]}/${value[1]}")
         return context.getString(R.string.sets_format, value[0] + 1, value[1])
     }
 
@@ -127,6 +129,7 @@ object NumberOfSetsConverters {
      * Note that Context is passed
      */
     @JvmStatic fun stringToSetArray(unused: Context, value: String): Array<Int> {
+        Log.w("Cash", "stringToSetArray value = $value")
         // Converts String to long
         if (value.isEmpty()) {
             return arrayOf(0, 0)

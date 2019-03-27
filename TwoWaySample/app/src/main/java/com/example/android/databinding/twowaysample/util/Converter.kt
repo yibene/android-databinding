@@ -16,27 +16,30 @@
 @file:JvmName("Converter")
 package com.example.android.databinding.twowaysample.util
 
-import kotlin.math.round
+import android.util.Log
 
-fun fromTenthsToSeconds(tenths: Int) : String {
+fun fromTenthsToSeconds(tenths: Float) : String {
+    Log.w("Cash", "fromTenthsToSeconds: tenths = $tenths")
     return if (tenths < 600) {
-        String.format("%.1f", tenths / 10.0)
+        String.format("%.1f", tenths / 10.0f)
     } else {
-        val minutes = (tenths / 10) / 60
-        val seconds = (tenths / 10) % 60
+        val minutes = ((tenths / 10) / 60).toInt()
+        val seconds = ((tenths / 10) % 60).toInt()
         String.format("%d:%02d", minutes, seconds)
     }
 }
 
-fun cleanSecondsString(seconds: String): Int {
+fun cleanSecondsString(seconds: String): Float {
+    Log.w("Cash", "cleanSecondsString: $seconds")
     // Remove letters and other characters
     val filteredValue = seconds.replace(Regex("""[^\d:.]"""), "")
-    if (filteredValue.isEmpty()) return 0
-    val elements: List<Int> = filteredValue.split(":").map { round(it.toDouble()).toInt() }
-
-    var result: Int
+    Log.w("Cash", "filteredValue = $filteredValue")
+    if (filteredValue.isEmpty()) return 0f
+    val elements: List<Float> = filteredValue.split(":").map { it.toFloat() }
+    Log.w("Cash", "elements = $elements")
+    var result: Float
     return when {
-        elements.size > 2 -> 0
+        elements.size > 2 -> 0f
         elements.size > 1 -> {
             result = elements[0] * 60
             result += elements[1]

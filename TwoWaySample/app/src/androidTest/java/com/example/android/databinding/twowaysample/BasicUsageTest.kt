@@ -50,7 +50,7 @@ class BasicUsageTest {
         onView(withId(R.id.setWorkTime)).perform(typeText("5"), pressImeActionButton())
 
         // Increment it
-        onView(withId(R.id.workplus)).perform(click())
+        onView(withId(R.id.workPlus)).perform(click())
 
         // Check that it was incremented and formatted correctly
         onView(withId(R.id.setWorkTime)).check(matches(withText("6.0")))
@@ -62,7 +62,7 @@ class BasicUsageTest {
         onView(withId(R.id.setWorkTime)).perform(typeText("5"), pressImeActionButton())
 
         // Decrement it
-        onView(withId(R.id.workminus)).perform(click())
+        onView(withId(R.id.workMinus)).perform(click())
 
         // Check that it was incremented and formatted correctly
         onView(withId(R.id.setWorkTime)).check(matches(withText("4.0")))
